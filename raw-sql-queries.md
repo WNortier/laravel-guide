@@ -74,7 +74,7 @@ Returns `1` if the record was successfully deleted, else returns `0`.
 ```php
 Route::get('/delete', function(){
 
-    $deleted = DB::delete('delete frm posts where id = ?', [1]);
+    $deleted = DB::delete('delete from posts where id = ?', [1]);
     return $deleted;
 })
 ```
