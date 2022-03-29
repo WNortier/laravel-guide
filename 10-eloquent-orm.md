@@ -6,6 +6,7 @@
 - ### [Retrieving Data](#Retrieving_Data)
 - ### [Inserting or saving data](#Inserting_or_saving_data)
 - ### [Creating data and configuring mass assignment](#Creating_data_and_configuring_mass_assignment)
+- ### [Updating with eloquent](#Updating_with_eloquent)
 - ### [Deleting data](#Deleting_data)
 - ### [Soft Deletes](#Soft_Deletes)
 
@@ -145,8 +146,6 @@ Route::get('/create', function(){
 - [Top](#Back_To_Top)
 
 ---
-
-- ### [Updating with eloquent](#Updating_with_eloquent)
 
 ## <a name="Updating_with_eloquent"></a>Updating with eloquent
 
