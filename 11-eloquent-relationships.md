@@ -218,6 +218,39 @@ We're setting up a relationship between the `users` table and the `roles` table
 
 ## <a name="Has_many_through_relation"></a>Has many through relation
 
+This relation provides a convenient shortcut for accessing distant relationships via an intermediary relation. For example we could have a users table, a posts table and a countries table. We can determine which country the user is from via the posts table. 
+
+We need to have a countries table and we also need to have a column in the users table for country_id
+
+`php artisan make:model Country -m`
+
+*migrations/create_countries_table*
+```php
+    public function up()
+    {
+        Schema::create('countries', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+    }
+```
+
+`php artisan make:migration add_country_id_column_to_users --table=users`
+
+*migrations/add_country_id_column_to_users.php*
+```php
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('country_id');
+        });
+    }
+```
+
+`php artisan migrate`
+
+
 ---
 
 - [Top](#Back_To_Top)
