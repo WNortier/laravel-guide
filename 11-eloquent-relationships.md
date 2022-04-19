@@ -8,6 +8,7 @@
 - ### [Many to many relations](#Many_to_many_relations)
 - ### [Querying intermediate table](#Querying_intermediate_table)
 - ### [Has many through relation](#Has_many_through_relation)
+- ### [Polymorphic relation](#Polymorphic_relation)
 
 ---
 
@@ -250,6 +251,31 @@ We need to have a countries table and we also need to have a column in the users
 
 `php artisan migrate`
 
+*models/country*
+```php
+    class Country extends Model
+    {
+        use HasFactory;
+
+        public function posts(){
+            return $this->hasManyThrough('App\Post', 'App\User');
+        }
+    }
+```
+
+*routes/web.php*
+```php
+Route::get('/user/country', function(){
+
+    $country = Country::find(1);
+
+    foreach($country->posts as $post){
+        return $post->title;
+    }
+
+});
+```
+
 
 ---
 
@@ -257,9 +283,8 @@ We need to have a countries table and we also need to have a column in the users
 
 ---
 
-- ### [1 TEMPLATE](#1_TEMPLATE)
 
-## <a name="1_TEMPLATE"></a>1 TEMPLATE
+## <a name="Polymorphic_relation"></a>Polymorphic relation
 
 ---
 
