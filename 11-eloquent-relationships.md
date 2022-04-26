@@ -286,6 +286,62 @@ Route::get('/user/country', function(){
 
 ## <a name="Polymorphic_relation"></a>Polymorphic relation
 
+Polymorphic relations allow a model to belong to more than one other model in a single association. We could have a users and a post table and they both could be related to one other table called photos. The photos table might say that this belongs to the post model with an id of 1 and this belongs to the user model with an id of 2. 
+
+`php artisan make:model Photo -m`
+
+```php
+    public function up()
+    {
+        Schema::create('photos', function (Blueprint $table) {
+            $table->id();
+            $table->string('path');
+            $table->integer('imageable_id');
+            $table->string('imageable_type');
+            $table->timestamps();
+        });
+    }
+```
+
+![advanced-css](./images/01.png)
+
+*models/photo*
+```php
+    class Photo extends Model
+    {
+        use HasFactory;
+
+        public function imageable(){
+            return $this->morphTo();
+        }
+    }
+```
+
+*models/user*
+```php
+    public function photos(){
+        return $this->morphMany('App\Models\Photo', 'imageable');
+    }
+```
+
+*models/post*
+```php
+    public function photos(){
+        return $this->morphMany('App\Models\Photo', 'imageable');
+    }
+```
+
+*routes/web.php*
+```php
+    Route::get('user/photos', function(){
+        $user = User::find(1);
+
+        foreach($user->photos as $photo){
+            echo $photo->path . '<br>';
+        }
+    });
+```
+
 ---
 
 - [Top](#Back_To_Top)
