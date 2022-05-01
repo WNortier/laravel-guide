@@ -35,4 +35,4 @@
 ---
 
 
-![advanced-css](./images/#.png)
+![laravel-guide](./images/#.png)

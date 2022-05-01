@@ -9,6 +9,7 @@
 - ### [Querying intermediate table](#Querying_intermediate_table)
 - ### [Has many through relation](#Has_many_through_relation)
 - ### [Polymorphic relation](#Polymorphic_relation)
+- ### [Polymorphic relation - the inverse](#Polymorphic_relation_the_inverse)
 
 ---
 
@@ -303,7 +304,7 @@ Polymorphic relations allow a model to belong to more than one other model in a 
     }
 ```
 
-![advanced-css](./images/01.png)
+![laravel-guide](./images/01.png)
 
 *models/photo*
 ```php
@@ -348,6 +349,22 @@ Polymorphic relations allow a model to belong to more than one other model in a 
 
 ---
 
+## <a name="Polymorphic_relation_the_inverse"></a>Polymorphic relation - the inverse
+
+*routes/web.php*
+```php
+Route::get('/photo/{id}/association', function($id) {
+    $photo = Photo::findOrFail($id);
+    return $photo->imageable;
+});
+```
+
+---
+
+- [Top](#Back_To_Top)
+
+---
+
 - ### [1 TEMPLATE](#1_TEMPLATE)
 
 ## <a name="1_TEMPLATE"></a>1 TEMPLATE
@@ -358,4 +375,14 @@ Polymorphic relations allow a model to belong to more than one other model in a 
 
 ---
 
-![advanced-css](./images/#.png)
+- ### [1 TEMPLATE](#1_TEMPLATE)
+
+## <a name="1_TEMPLATE"></a>1 TEMPLATE
+
+---
+
+- [Top](#Back_To_Top)
+
+---
+
+![laravel-guide](./images/#.png)
