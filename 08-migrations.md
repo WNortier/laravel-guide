@@ -37,7 +37,7 @@ DB_DATABASE=new_db;
 php artisan migrate
 ```
 
-![guidelines](/images/00.png)
+![laravel-guide](/images/00.png)
 
 
 ---

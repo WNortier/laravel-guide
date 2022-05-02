@@ -351,6 +351,20 @@ Polymorphic relations allow a model to belong to more than one other model in a 
 
 ## <a name="Polymorphic_relation_the_inverse"></a>Polymorphic relation - the inverse
 
+We can also find the inverse associations of a polymorphic relationship.
+
+*models/photo*
+```php
+    class Photo extends Model
+    {
+        use HasFactory;
+
+        public function imageable(){
+            return $this->morphTo();
+        }
+    }
+```
+
 *routes/web.php*
 ```php
 Route::get('/photo/{id}/association', function($id) {

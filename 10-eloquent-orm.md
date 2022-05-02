@@ -280,5 +280,3 @@ Route::get('/forceDelete', function(){
 - [Top](#Back_To_Top)
 
 ---
-
-![advanced-css](./images/#.png)
