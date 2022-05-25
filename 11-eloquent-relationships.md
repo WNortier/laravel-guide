@@ -10,6 +10,7 @@
 - ### [Has many through relation](#Has_many_through_relation)
 - ### [Polymorphic relation](#Polymorphic_relation)
 - ### [Polymorphic relation - the inverse](#Polymorphic_relation_the_inverse)
+- ### [Polymorphic relation many to many](#Polymorphic_relation_many_to_many)
 
 ---
 
@@ -379,9 +380,78 @@ Route::get('/photo/{id}/association', function($id) {
 
 ---
 
-- ### [1 TEMPLATE](#1_TEMPLATE)
 
-## <a name="1_TEMPLATE"></a>1 TEMPLATE
+## <a name="Polymorphic_relation_many_to_many"></a>Polymorphic relation many to many
+
+Many to many relationships for polymorphic relations share a single list of unique records among the rest of the other tables. A Post and Video table can both share Tags. 
+
+`php artisan make:model Video -m`
+
+*migrations*
+```php
+    public function up()
+    {
+        Schema::create('videos', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+    }
+```
+
+`php artisan make:model Tag -m`
+
+*migrations*
+```php
+    public function up()
+    {
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+    }
+```
+
+`php artisan make:model Taggable -m`
+
+*migrations*
+```php
+    public function up()
+    {
+        Schema::create('taggables', function (Blueprint $table) {
+            $table->id();
+            $table->integer('tag_id');
+            $table->integer('taggable_id');
+            $table->integer('taggable_type');
+            $table->timestamps();
+        });
+    }
+```
+
+*App\Models\Post*
+```php
+    public function tags(){
+        return $this->morphToMany('App\Models\Tag', 'taggable');
+    }
+```
+
+*App\Models\Tag*
+```php
+class Tag extends Model
+{
+    use HasFactory;
+
+    public function posts(){
+        return $this->morphedByMany('App\Models\Post', 'taggable');
+    }
+
+    public function videos(){
+        return $this->morphedByMany('App\Models\Video', 'taggable');
+    }
+}
+```
+
 
 ---
 
