@@ -44,7 +44,8 @@ Laravel Installer as a global Composer dependency:
 For this to work need to edit paths:
 
 `sudo nano /etc/paths`
-`/Users/warwicknortier/.composer/vendor/bin`
+
+Add the path: `/Users/warwicknortier/.composer/vendor/bin`
 
 ---
 
